@@ -1,11 +1,12 @@
 var createError = require('http-errors');
-var express = require('express');
+var express = require('express'); 
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 // const datas = require('./model/db.json');
 // json 을 자동으로 js 배열로 형변환
-// console.log(datas)
+// console.log(datas) 
+
 
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -17,6 +18,8 @@ var boardRouter = require('./routes/board');
 var makeupRouter = require('./routes/makeup');
 
 var app = express();
+var port =  process.env.PORT || '4000' ;
+app.set('port', port);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,4 +53,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+// module.exports = app;
+app.listen(port);
