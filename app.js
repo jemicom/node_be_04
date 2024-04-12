@@ -9,8 +9,8 @@ var logger = require('morgan');
 
 
 const cors = require('cors');
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,8 +22,8 @@ var port =  process.env.PORT || '4000' ;
 app.set('port', port);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 app.use(cors()); // 어떤 url 요청도 모두 들어주기, url을 제한할 필요가 있음 
 app.use(logger('dev'));
@@ -32,11 +32,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/board', boardRouter);
 app.use('/makeup', makeupRouter);
 
+app.get('/', (req, res)=>{
+  res.sendFile(path.join(__dirname, "views" , 'index.html'))
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
